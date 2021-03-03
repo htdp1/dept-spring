@@ -1,0 +1,16 @@
+server:
+  port: 8080
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+spring:
+  config:
+    import: 
+    - application-apis.yml
+    - application-redis.yml
+  application:
+    name: session-spring

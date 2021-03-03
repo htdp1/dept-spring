@@ -1,0 +1,9 @@
+spring:
+  data:
+    rest:
+      basePath: /api
+
+apis:
+#  userinfo: http://localhost:3000/user_info/
+  userinfo: http://k8s-sessiond-empsprin-eddc7b7a44-95816314.ap-northeast-2.elb.amazonaws.com/test/
+  
