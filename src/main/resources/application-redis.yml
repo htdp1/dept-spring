@@ -2,15 +2,24 @@ spring:
   session:
     store-type: redis
     redis:
-      flush-mode: on-save
-      namespace: htdp1:session
+      namespace: "htdp1:session"
       host: 127.0.0.1
       port: 7000
       password: 
+
   cache: 
     type: redis
     redis:
-      namespace: htdp1:dept-spring
+      namespace: "htdp1:cache:"
       host: 127.0.0.1
       port: 7001
       password:
+      
+  repository: 
+    type: redis
+    redis:
+      namespace: ""
+      host: 127.0.0.1
+      port: 7001
+      password:
+    

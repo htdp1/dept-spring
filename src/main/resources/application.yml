@@ -11,6 +11,14 @@ spring:
   config:
     import: 
     - application-apis.yml
+    - application-mariadb.yml
     - application-redis.yml
   application:
-    name: session-spring
+    name: dept-spring
+  data:
+    rest:
+      basePath: /api
+
+logging:
+  level:
+    '[com.htdp1.deptspring]': debug

@@ -13,9 +13,8 @@ import org.springframework.data.redis.repository.configuration.EnableRedisReposi
 @EnableRedisRepositories
 public class RedisConfig {
 
-	public @Value("${spring.cache.redis.host}") String host;
-	public @Value("${spring.cache.redis.port}") int port;
-	public @Value("${spring.cache.redis.namespace}") String namespace;
+	public @Value("${spring.repository.redis.host}") String host;
+	public @Value("${spring.repository.redis.port}") int port;
 
 	@Bean
 	public RedisConnectionFactory redisConnectionFactory() {

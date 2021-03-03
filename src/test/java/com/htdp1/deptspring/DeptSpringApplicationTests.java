@@ -21,10 +21,8 @@ class DeptSpringApplicationTests {
 	public void basicSave() {
 		// given
 		Department department = new Department("d001", "test1");
-
 		// when
 		Department savedDepartment = departmentRepository.save(department);
-
 		// then
 		Optional<Department> findDepartment = departmentRepository.findById(savedDepartment.getDeptNo());
 

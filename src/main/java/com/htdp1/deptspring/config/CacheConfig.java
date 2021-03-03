@@ -22,7 +22,7 @@ public class CacheConfig extends CachingConfigurerSupport {
 	public @Value("${spring.cache.redis.port}") int port;
 	public @Value("${spring.cache.redis.namespace}") String namespace;
 
-	@Bean
+	@Bean(name = "redisCacheConnectionFactory")
 	public RedisConnectionFactory redisCacheConnectionFactory() {
 		RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration();
 		redisStandaloneConfiguration.setHostName(host);
@@ -33,15 +33,14 @@ public class CacheConfig extends CachingConfigurerSupport {
 		return connectionFactory;
 	}
 
-	@Bean
+	@Bean(name = "cacheManager")
 	@Override
 	public CacheManager cacheManager() {
 
 		RedisCacheConfiguration configuration = RedisCacheConfiguration.defaultCacheConfig()
 				.serializeValuesWith(RedisSerializationContext.SerializationPair
 						.fromSerializer(new GenericJackson2JsonRedisSerializer()))
-				.prefixCacheNameWith(namespace)
-				.entryTtl(Duration.ofHours(1L));
+				.prefixCacheNameWith(namespace).entryTtl(Duration.ofHours(1L));
 
 		RedisCacheManager.RedisCacheManagerBuilder builder = RedisCacheManager.RedisCacheManagerBuilder
 				.fromConnectionFactory(redisCacheConnectionFactory());
