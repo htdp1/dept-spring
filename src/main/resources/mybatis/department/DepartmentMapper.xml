@@ -8,4 +8,9 @@
     <select id="findById" resultType="com.htdp1.deptspring.dept.model.Department">
         select dept_no, dept_name from departments where dept_no = #{deptNo}
     </select>
+
+    <delete id="deleteById">
+        delete from departments where dept_no = #{deptNo}
+    </delete>
+
 </mapper>

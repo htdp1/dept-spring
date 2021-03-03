@@ -11,4 +11,6 @@ public interface DepartmentMapper {
 	List<Department> findAll();
 
 	Department findById(String deptNo);
+
+	void deleteById(String deptNo);
 }

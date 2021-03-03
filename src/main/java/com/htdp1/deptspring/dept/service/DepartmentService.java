@@ -20,4 +20,9 @@ public class DepartmentService {
 	public Department getDepartment(String deptNo) {
 		return mapper.findById(deptNo);
 	}
+
+	public void deleteDepartment(String deptNo) {
+		mapper.deleteById(deptNo);
+	}
+
 }
