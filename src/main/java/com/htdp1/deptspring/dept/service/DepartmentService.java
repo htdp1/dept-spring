@@ -13,11 +13,11 @@ public class DepartmentService {
 	@Autowired
 	public DepartmentMapper mapper;
 
-	public List<Department> getDepartment() {
+	public List<Department> getDepartments() {
 		return mapper.findAll();
 	}
 
-	public Department selectDepartment(String deptNo) {
+	public Department getDepartment(String deptNo) {
 		return mapper.findById(deptNo);
 	}
 }

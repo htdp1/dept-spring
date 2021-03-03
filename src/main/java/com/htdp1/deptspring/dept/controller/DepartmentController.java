@@ -24,19 +24,19 @@ public class DepartmentController {
 
 	@GetMapping(value = "/departments")
 	@ResponseBody
-	@Cacheable(value = "departments", cacheManager = "cacheManager")
-	public List<Department> getDepartment() {
-		log.debug("selectDepartment");
+	@Cacheable(cacheNames = "departments", cacheManager = "cacheManager")
+	public List<Department> getDepartments() {
+		log.debug("getDepartments");
 
-		return departmentService.getDepartment();
+		return departmentService.getDepartments();
 	}
 
 	@GetMapping(value = "/departments/{deptNo}")
 	@ResponseBody
-	@Cacheable(value = "departments", key = "#deptNo", cacheManager = "cacheManager")
+	@Cacheable(cacheNames = "departments", key = "#deptNo", cacheManager = "cacheManager")
 	public Department getDepartment(@PathVariable String deptNo) {
 		log.debug("selectDepartment");
 
-		return departmentService.selectDepartment(deptNo);
+		return departmentService.getDepartment(deptNo);
 	}
 }

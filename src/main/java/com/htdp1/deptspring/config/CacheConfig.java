@@ -21,6 +21,7 @@ public class CacheConfig extends CachingConfigurerSupport {
 	public @Value("${spring.cache.redis.host}") String host;
 	public @Value("${spring.cache.redis.port}") int port;
 	public @Value("${spring.cache.redis.namespace}") String namespace;
+	public @Value("${spring.cache.redis.ttl}") long ttl;
 
 	@Bean(name = "redisCacheConnectionFactory")
 	public RedisConnectionFactory redisCacheConnectionFactory() {
@@ -40,7 +41,7 @@ public class CacheConfig extends CachingConfigurerSupport {
 		RedisCacheConfiguration configuration = RedisCacheConfiguration.defaultCacheConfig()
 				.serializeValuesWith(RedisSerializationContext.SerializationPair
 						.fromSerializer(new GenericJackson2JsonRedisSerializer()))
-				.prefixCacheNameWith(namespace).entryTtl(Duration.ofHours(1L));
+				.prefixCacheNameWith(namespace).entryTtl(Duration.ofMinutes(ttl));
 
 		RedisCacheManager.RedisCacheManagerBuilder builder = RedisCacheManager.RedisCacheManagerBuilder
 				.fromConnectionFactory(redisCacheConnectionFactory());
