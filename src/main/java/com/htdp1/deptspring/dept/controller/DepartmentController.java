@@ -24,6 +24,14 @@ public class DepartmentController {
 	@Autowired
 	DepartmentService departmentService;
 
+	@GetMapping(value = "/departmentsNoCache")
+	@ResponseBody
+	public List<Department> getDepartmentsNoCache() {
+		log.debug("getDepartments");
+
+		return departmentService.getDepartments();
+	}
+
 	@GetMapping(value = "/departments")
 	@ResponseBody
 	@Cacheable(cacheNames = "departments", cacheManager = "cacheManager")
