@@ -20,7 +20,7 @@ class DeptSpringApplicationTests {
 	@Test
 	public void basicSave() {
 		// given
-		Department department = new Department("d001", "test1");
+		Department department = new Department("t0001", "test1");
 		// when
 		Department savedDepartment = departmentRepository.save(department);
 		// then
