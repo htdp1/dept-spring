@@ -11,7 +11,6 @@ import com.htdp1.deptspring.dept.model.Department;
 import com.htdp1.deptspring.dept.repository.DepartmentRepository;
 
 @SpringBootApplication
-@EnableCaching
 public class DeptSpringApplication {
 
 	public static void main(String[] args) {

@@ -5,6 +5,7 @@ import java.time.Duration;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.cache.RedisCacheConfiguration;
@@ -16,6 +17,7 @@ import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSeriali
 import org.springframework.data.redis.serializer.RedisSerializationContext;
 
 @Configuration
+@EnableCaching
 public class CacheConfig extends CachingConfigurerSupport {
 
 	public @Value("${spring.cache.redis.host}") String host;
@@ -38,15 +40,16 @@ public class CacheConfig extends CachingConfigurerSupport {
 	@Override
 	public CacheManager cacheManager() {
 
-		RedisCacheConfiguration configuration = RedisCacheConfiguration.defaultCacheConfig()
+		RedisCacheConfiguration configuration = RedisCacheConfiguration
+				.defaultCacheConfig()
 				.serializeValuesWith(RedisSerializationContext.SerializationPair
 						.fromSerializer(new GenericJackson2JsonRedisSerializer()))
-				.prefixCacheNameWith(namespace).entryTtl(Duration.ofMinutes(ttl));
+				.prefixCacheNameWith(namespace)
+				.entryTtl(Duration.ofMinutes(ttl));
 
 		RedisCacheManager.RedisCacheManagerBuilder builder = RedisCacheManager.RedisCacheManagerBuilder
-				.fromConnectionFactory(redisCacheConnectionFactory());
-
-		builder.cacheDefaults(configuration);
+				.fromConnectionFactory(redisCacheConnectionFactory())
+				.cacheDefaults(configuration);
 
 		return builder.build();
 	}
