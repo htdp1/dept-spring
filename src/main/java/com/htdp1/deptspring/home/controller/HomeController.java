@@ -16,6 +16,13 @@ public class HomeController {
 	public String applicationName;
 
 	@GetMapping("/")
+	public String index() {
+		log.debug("index");
+
+		return "Hello " + applicationName;
+	}
+
+	@GetMapping("/session")
 	public String index(HttpSession session) {
 		log.debug("index");
 
