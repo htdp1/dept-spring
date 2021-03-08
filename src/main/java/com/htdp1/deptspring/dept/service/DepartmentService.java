@@ -6,21 +6,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.htdp1.deptspring.dept.mapper.DepartmentMapper;
-import com.htdp1.deptspring.dept.model.Department;
+import com.htdp1.deptspring.dept.model.DepartmentTable;
 
 @Service
 public class DepartmentService {
 	@Autowired
 	public DepartmentMapper mapper;
 
-	public List<Department> getDepartments() {
+	public List<DepartmentTable> getDepartments() {
 		return mapper.findAll();
 	}
 
-	public Department getDepartment(String deptNo) {
+	public DepartmentTable getDepartment(String deptNo) {
 		return mapper.findById(deptNo);
 	}
-
+	
+	public void setDepartment(DepartmentTable departmentTable) {
+		mapper.updateById(departmentTable);
+	}
+	
 	public void deleteDepartment(String deptNo) {
 		mapper.deleteById(deptNo);
 	}

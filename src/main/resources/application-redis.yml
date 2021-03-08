@@ -11,7 +11,7 @@ spring:
     type: redis
     redis:
       namespace: "htdp1:dept-spring:cache:"
-      ttl: 1 # min
+      ttl: 10 # min
       host: 127.0.0.1
       port: 7001
       password:

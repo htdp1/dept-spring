@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.htdp1.deptspring.dept.mapper.DepartmentMapper">
-    <select id="findAll" resultType="com.htdp1.deptspring.dept.model.Department">
+    <select id="findAll" resultType="com.htdp1.deptspring.dept.model.DepartmentTable">
         select dept_no, dept_name from departments
     </select>
 
-    <select id="findById" resultType="com.htdp1.deptspring.dept.model.Department">
+    <select id="findById" resultType="com.htdp1.deptspring.dept.model.DepartmentTable">
         select dept_no, dept_name from departments where dept_no = #{deptNo}
     </select>
+    
+    <update id="updateById">
+        update departments set dept_name = #{deptName} where dept_no = #{deptNo}
+    </update>
 
     <delete id="deleteById">
         delete from departments where dept_no = #{deptNo}

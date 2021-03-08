@@ -18,7 +18,7 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.TransactionManager;
 
 @Configuration
-@EnableJdbcRepositories
+@EnableJdbcRepositories(basePackages = "com.htdp1.deptspring.dept")
 @Import(MyBatisJdbcConfiguration.class)
 public class MybatisConfig {
 	@Autowired
