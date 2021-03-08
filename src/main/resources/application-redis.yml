@@ -23,4 +23,6 @@ spring:
       host: 127.0.0.1
       port: 7001
       password:
-    
+  
+session:
+  enabled: false
