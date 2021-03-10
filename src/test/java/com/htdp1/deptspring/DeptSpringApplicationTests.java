@@ -5,25 +5,25 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.htdp1.deptspring.dept.model.DepartmentRedis;
 import com.htdp1.deptspring.dept.repository.DepartmentRepositoryRedis;
 
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @SpringBootTest
-@AllArgsConstructor
 @Slf4j
 class DeptSpringApplicationTests {
 
+	@Autowired
 	private DepartmentRepositoryRedis departmentRepository;
 
 	@Test
 	public void basicSave() {
 		departmentRepository.deleteAll();
-		
+
 		for (int i = 0; i < 100; i++) {
 			departmentRepository.save(new DepartmentRedis("t" + i, "test" + i));
 		}
