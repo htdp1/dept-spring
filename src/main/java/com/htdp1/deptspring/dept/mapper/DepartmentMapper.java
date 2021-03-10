@@ -12,7 +12,7 @@ public interface DepartmentMapper {
 
 	DepartmentTable findById(String deptNo);
 	
-	void updateById(DepartmentTable departmentTable);
+	int updateById(DepartmentTable departmentTable);
 
-	void deleteById(String deptNo);
+	int deleteById(String deptNo);
 }

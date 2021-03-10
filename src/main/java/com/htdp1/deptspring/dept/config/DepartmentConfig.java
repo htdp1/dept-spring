@@ -1,7 +1,5 @@
 package com.htdp1.deptspring.dept.config;
 
-import java.util.Random;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Bean;

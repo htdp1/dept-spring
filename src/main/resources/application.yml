@@ -6,7 +6,10 @@ management:
     web:
       exposure:
         include: "*"
-
+  metrics:
+    cache:
+      instrument: true
+      
 spring:
   config:
     import: 

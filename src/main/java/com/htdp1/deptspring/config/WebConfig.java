@@ -17,7 +17,7 @@ public class WebConfig implements WebMvcConfigurer {
 	public @Value("${session.enabled}") boolean enabled;
 
 	/*
-	 * 로그인 인증 Interceptor 설정
+	 * 로그인 인증 Intercepter 설정
 	 */
 	@Autowired
 	LoggerInterceptor loggerInterceptor;

@@ -9,7 +9,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@RedisHash("htdp1:dest-spring:repository:departments")
+@RedisHash("htdp1:dept-spring:repository:departments")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Data
 @Builder
