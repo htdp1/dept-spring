@@ -1,14 +1,13 @@
 server:
   port: 8080
+  servlet:
+    context-path: /dept-spring 
 
 management:
   endpoints:
     web:
       exposure:
         include: "*"
-  metrics:
-    cache:
-      instrument: true
       
 spring:
   config:
@@ -25,3 +24,8 @@ spring:
 logging:
   level:
     '[com.htdp1.deptspring]': debug
+
+### user defined ###
+session:
+  enabled: false
+

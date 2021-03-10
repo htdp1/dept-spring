@@ -1,6 +1,6 @@
 curl -X PUT -H "content-type:application/json" http://localhost:8080/v1/department -d "{\"deptNo\":\"d001\",\"deptName\":\"Customer Service add text\"}"
 
-curl -X POST -H "content-type:application/json" http://localhost:8080/api/departmentRedises -d "{\"deptName\":\"test1 add\"}"
+curl -X POST -H "content-type:application/json" http://localhost:8080/api/departmentRedises -d "{\"deptNo\":\"t9\",\"deptName\":\"test1 add\"}"
 
 curl -X POST -H "content-type:application/json" http://localhost:8080/api/departmentTables -d "{\"deptName\":\"test1 add\"}"
 

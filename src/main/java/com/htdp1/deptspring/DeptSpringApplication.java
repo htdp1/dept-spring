@@ -22,8 +22,10 @@ public class DeptSpringApplication {
 	@Autowired
 	private DepartmentRepositoryRedis departmentRepository;
 
-	public @PostConstruct void init() {
+	@PostConstruct
+	public void init() {
 		departmentRepository.deleteAll();
+		
 		for (int i = 0; i < 3; i++) {
 			departmentRepository.save(new DepartmentRedis("t" + i, "test" + i));
 		}

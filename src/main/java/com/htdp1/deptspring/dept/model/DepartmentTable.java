@@ -1,7 +1,6 @@
 package com.htdp1.deptspring.dept.model;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.relational.core.mapping.Table;
 
 import lombok.AccessLevel;
@@ -12,13 +11,12 @@ import lombok.NoArgsConstructor;
 @Table("departments")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Data
-@Builder
 public class DepartmentTable {
 	@Id
 	private String deptNo;
 	private String deptName;
 
-	@PersistenceConstructor
+	@Builder
 	public DepartmentTable(String deptNo, String deptName) {
 		this.deptNo = deptNo;
 		this.deptName = deptName;

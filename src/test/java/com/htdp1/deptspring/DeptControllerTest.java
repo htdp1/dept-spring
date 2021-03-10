@@ -20,23 +20,27 @@ import com.htdp1.deptspring.dept.model.DepartmentTable;
 public class DeptControllerTest {
 	@Autowired
 	private MockMvc mockMvc;
-	
+
 	private static ObjectMapper objectMapper = new ObjectMapper();
-	
+
 	final DepartmentTable departmentTable = DepartmentTable.builder().deptNo("t001").deptName("test001").build();
 
-	@Test 
-	public void getDepartment() throws Exception { // when // then 
+	@Test
+	public void getDepartment() throws Exception {
 		String param = objectMapper.writeValueAsString(departmentTable);
-		
+
 		this.mockMvc.perform(put("/v1/department")
-				.contentType(MediaType.APPLICATION_JSON)
-				.content(param))
-				.andExpect(status().isOk())
-				.andDo(print());
-		
-		this.mockMvc.perform(get("/v1/departments").contentType(MediaType.APPLICATION_JSON))
-				.andExpect(status().isOk())
-				.andDo(print());
+							.contentType(MediaType.APPLICATION_JSON)
+							.content(param)
+							)
+						.andExpect(status().isOk())
+						.andDo(print())
+						;
+
+		this.mockMvc.perform(get("/v1/departments")
+							.contentType(MediaType.APPLICATION_JSON))
+						.andExpect(status().isOk())
+						.andDo(print())
+						;
 	}
 }
