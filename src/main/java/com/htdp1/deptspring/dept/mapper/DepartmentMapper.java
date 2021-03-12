@@ -4,15 +4,15 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.htdp1.deptspring.dept.model.DepartmentTable;
+import com.htdp1.deptspring.dept.model.Department;
 
 @Mapper
 public interface DepartmentMapper {
-	List<DepartmentTable> findAll();
+	List<Department> findAll();
 
-	DepartmentTable findById(String deptNo);
+	Department findById(String deptNo);
 	
-	int updateById(DepartmentTable departmentTable);
+	int updateById(Department departmentTable);
 
 	int deleteById(String deptNo);
 }

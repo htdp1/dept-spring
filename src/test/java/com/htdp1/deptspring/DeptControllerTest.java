@@ -13,7 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.htdp1.deptspring.dept.model.DepartmentTable;
+import com.htdp1.deptspring.dept.model.Department;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -23,7 +23,7 @@ public class DeptControllerTest {
 
 	private static ObjectMapper objectMapper = new ObjectMapper();
 
-	final DepartmentTable departmentTable = DepartmentTable.builder().deptNo("t001").deptName("test001").build();
+	final Department departmentTable = Department.builder().deptNo("t001").deptName("test001").build();
 
 	@Test
 	public void getDepartment() throws Exception {

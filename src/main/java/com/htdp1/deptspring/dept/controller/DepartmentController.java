@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.htdp1.deptspring.dept.model.DepartmentTable;
+import com.htdp1.deptspring.dept.model.Department;
 import com.htdp1.deptspring.dept.service.DepartmentService;
 
 import lombok.AllArgsConstructor;
@@ -25,28 +25,28 @@ public class DepartmentController {
 	private DepartmentService departmentService;
 
 	@GetMapping(value = "/departmentsNoCache")
-	public List<DepartmentTable> getDepartmentsNoCache() {
+	public List<Department> getDepartmentsNoCache() {
 		log.debug("getDepartments");
 
 		return departmentService.getDepartments();
 	}
 
 	@GetMapping(value = "/departments")
-	public List<DepartmentTable> getDepartments() {
+	public List<Department> getDepartments() {
 		log.debug("getDepartments");
 
 		return departmentService.getDepartments();
 	}
 
 	@GetMapping(value = "/department/{deptNo}")
-	public DepartmentTable getDepartment(@PathVariable String deptNo) {
+	public Department getDepartment(@PathVariable String deptNo) {
 		log.debug("getDepartment");
 
 		return departmentService.getDepartment(deptNo);
 	}
 
 	@PutMapping(value = "/department")
-	public int setDepartments(@RequestBody DepartmentTable departmentTable) {
+	public int setDepartments(@RequestBody Department departmentTable) {
 		log.debug("setDepartments");
 		
 		return departmentService.setDepartment(departmentTable);

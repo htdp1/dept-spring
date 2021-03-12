@@ -5,3 +5,5 @@ curl -X POST -H "content-type:application/json" http://localhost:8080/api/depart
 curl -X POST -H "content-type:application/json" http://localhost:8080/api/departmentTables -d "{\"deptName\":\"test1 add\"}"
 
 curl -X PUT -H "content-type:application/json" http://localhost:8080/api/departmentTables -d "{\"deptNo\":\"t9\",\"deptName\":\"test1 add\"}"
+
+curl -X POST -H "content-type:application/json" http://localhost:8080/user-spring/api/users -d "{\"email\":\"bbb@bbb.ccc\",\"password\":\"password2\",\"empNo\":10002}"

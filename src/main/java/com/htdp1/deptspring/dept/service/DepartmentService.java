@@ -9,7 +9,7 @@ import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 
 import com.htdp1.deptspring.dept.mapper.DepartmentMapper;
-import com.htdp1.deptspring.dept.model.DepartmentTable;
+import com.htdp1.deptspring.dept.model.Department;
 
 import lombok.AllArgsConstructor;
 
@@ -20,18 +20,18 @@ public class DepartmentService {
 	public DepartmentMapper mapper;
 
 	@Cacheable(cacheNames = "departments", key = "'findAll'", cacheManager = "cacheManager")
-	public List<DepartmentTable> getDepartments() {
+	public List<Department> getDepartments() {
 		return mapper.findAll();
 	}
 
 	@Cacheable(cacheNames = "departments", key = "#deptNo", cacheManager = "cacheManager")
-	public DepartmentTable getDepartment(String deptNo) {
+	public Department getDepartment(String deptNo) {
 		return mapper.findById(deptNo);
 	}
 
 	@CacheEvict(cacheNames = "departments", key = "'findAll'", cacheManager = "cacheManager")
 	@CachePut(cacheNames = "departments", key = "#departmentTable.deptNo", cacheManager = "cacheManager")
-	public int setDepartment(DepartmentTable departmentTable) {
+	public int setDepartment(Department departmentTable) {
 		return mapper.updateById(departmentTable);
 	}
 
