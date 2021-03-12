@@ -20,12 +20,13 @@ redis cache 를 적용하는 과정을 설명한다.
 
 ## spring-boot-data-rest 를 이용한 DB table CRUD 기능
 기본으로 spring-boot web project 를 생성하고 아래 작업을 진행합니다.
-- data rest maven dependancy 추가
+- spring-boot-data-rest maven dependency 추가
 - application.yml 설정
 - model class 생성
 - repository class 생성
+- spring-boot 실행 후 API 확인
 
-### data rest maven dependancy 추가
+### spring-boot-data-rest maven dependency 추가
 - pom.xml
     ```xml
     <dependency>
@@ -42,8 +43,8 @@ redis cache 를 적용하는 과정을 설명한다.
     </dependency>
     ```
 ### application.yml 설정
-- application-mariadb.yml 추가
 - 샘플소스는 mariadb 를 사용했으나 개별 사용중인 DB 를 사용하세요.
+- application-mariadb.yml 추가
     ```yaml
     spring:
       datasource:
@@ -54,6 +55,11 @@ redis cache 를 적용하는 과정을 설명한다.
     ```
 - application.yml 설정
     ```yaml
+    server:
+      port: 8080
+      servlet:
+        context-path: /dept-spring 
+
     spring:
       config:
         import: 
@@ -63,8 +69,8 @@ redis cache 를 적용하는 과정을 설명한다.
           basePath: /api
     ```
 ### model class 생성
-- model.Department.java
 - table name, field name 에 맞춰서 아래 format 으로 작성합니다.
+- model.Department.java
     ```java
     @Entity(name = "departments")
     @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -146,12 +152,12 @@ redis cache 를 적용하는 과정을 설명한다.
 
 ## spring-boot redis 설정
 아래 작업을 진행합니다.
-- redis maven dependancy 추가
+- sprig-boot-data-redis maven dependency 추가
 - application.yml redis 설정
 - redis configuration class 생성
 - repository class 에 cache 적용
 
-### redis maven dependancy 추가
+### sprig-boot-data-redis maven dependency 추가
 - pom.xml
     ```xml
     <dependency>
@@ -180,7 +186,7 @@ redis cache 를 적용하는 과정을 설명한다.
         - application-redis.yml
     ```
 ### redis configuration class 생성
-- config/CacheConfig.java
+- config.CacheConfig.java
     ```java
     @Configuration
     @EnableCaching
@@ -208,27 +214,27 @@ redis cache 를 적용하는 과정을 설명한다.
         @Override
         public CacheManager cacheManager() {
             // redis cache configuration
-            // serializer, prefix, ttl 설정
             RedisCacheConfiguration configuration = RedisCacheConfiguration
                     .defaultCacheConfig()
                     .serializeValuesWith(RedisSerializationContext.SerializationPair
                             .fromSerializer(new GenericJackson2JsonRedisSerializer()))
-                    .prefixCacheNameWith(namespace)
-                    .entryTtl(Duration.ofMinutes(ttl));
+                    .prefixCacheNameWith(namespace) // cache key prefix
+                    .entryTtl(Duration.ofMinutes(ttl)) // time-to-live
+            ; 
 
             // redis cache manager
-            // redis connection factory, redis configuration 추가
             RedisCacheManager.RedisCacheManagerBuilder builder = RedisCacheManager.RedisCacheManagerBuilder
-                    .fromConnectionFactory(redisCacheConnectionFactory())
-                    .cacheDefaults(configuration);
+                    .fromConnectionFactory(redisCacheConnectionFactory()) // connection factory
+                    .cacheDefaults(configuration) // redis cache configuration
+            ;
 
             return builder.build();
         }
     }
     ```
 ### repository class 에 cache 적용
-- repository.DepartmentRepository.java
 - cacheManager = "cacheManager" 는 CacheConfig.java 의 @Bean(name = "cacheManager") 과 동일하게 설정
+- repository.DepartmentRepository.java
     ```java
     @RepositoryRestResource
     public interface DepartmentRepository extends CrudRepository<Department, String> {

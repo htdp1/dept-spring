@@ -40,16 +40,17 @@ public class CacheConfig extends CachingConfigurerSupport {
 	@Override
 	public CacheManager cacheManager() {
 
-		RedisCacheConfiguration configuration = RedisCacheConfiguration
-				.defaultCacheConfig()
+		RedisCacheConfiguration configuration = RedisCacheConfiguration.defaultCacheConfig()
 				.serializeValuesWith(RedisSerializationContext.SerializationPair
 						.fromSerializer(new GenericJackson2JsonRedisSerializer()))
-				.prefixCacheNameWith(namespace)
-				.entryTtl(Duration.ofMinutes(ttl));
+				.prefixCacheNameWith(namespace) // cache key prefix
+				.entryTtl(Duration.ofMinutes(ttl)) // time-to-live
+		;
 
 		RedisCacheManager.RedisCacheManagerBuilder builder = RedisCacheManager.RedisCacheManagerBuilder
-				.fromConnectionFactory(redisCacheConnectionFactory())
-				.cacheDefaults(configuration);
+				.fromConnectionFactory(redisCacheConnectionFactory()) // connection factory
+				.cacheDefaults(configuration) // cache configuration
+		;
 
 		return builder.build();
 	}
