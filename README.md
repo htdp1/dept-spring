@@ -25,7 +25,7 @@ spring-boot redis 설정을 위해서 아래 작업을 진행합니다.
 
 ### redis maven dependancy 추가
 - pom.xml
-    ```
+    ```xml
     <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-data-redis</artifactId>
@@ -33,7 +33,7 @@ spring-boot redis 설정을 위해서 아래 작업을 진행합니다.
     ```
 ### application.yml redis 설정
 - application-redis.yml 파일 생성
-    ```
+    ```yaml
     spring: 
       cache: 
         type: redis
@@ -45,7 +45,7 @@ spring-boot redis 설정을 위해서 아래 작업을 진행합니다.
         password:                             # redis password
     ```
 - application.yml 에 import 처리
-    ```
+    ```yaml
     spring:
       config:
         import:
@@ -53,7 +53,7 @@ spring-boot redis 설정을 위해서 아래 작업을 진행합니다.
     ```
 ### redis configuration class 생성
 - config/CacheConfig.java
-    ```
+    ```java
     @Configuration
     @EnableCaching
     public class CacheConfig extends CachingConfigurerSupport {
