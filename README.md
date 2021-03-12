@@ -35,7 +35,7 @@ spring-boot redis 설정을 위해서 아래 작업을 진행합니다.
 - application-redis.yml 파일 생성
     ```
     spring: 
-    cache: 
+      cache: 
         type: redis
         redis:
         namespace: "htdp1:dept-spring:cache:" # redis key prefix
@@ -47,7 +47,7 @@ spring-boot redis 설정을 위해서 아래 작업을 진행합니다.
 - application.yml 에 import 처리
     ```
     spring:
-    config:
+      config:
         import:
         - application-redis.yml
     ```
