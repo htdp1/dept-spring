@@ -1,32 +1,16 @@
-# dept-spring
-Department data crud 기능 및 redis cache 처리
-
-## docker build
-```
-docker build -t dept-spring .
-```
-```
-docker tag dept-spring htdp1/dept-spring:v1
-docker push htdp1/dept-spring:v1
-```
-```
-docker tag dept-spring htdp1/dept-spring:latest
-docker push htdp1/dept-spring:latest
-```
-
 # spring-boot redis cache 개발
-spring-boot-data-rest 를 이용하여 DB table CRUD 기능을 개발하고
-redis cache 를 적용하는 과정을 설명한다.
+spring-boot-data-rest, spring-boot-data-jpa 를 이용하여 DB table 에 대한 CRUD 기능을 개발하고, 
+spring-boot-starter-data-redis 를 사용하여 redis cache 를 적용하는 방법을 설명한다.
 
 ## spring-boot-data-rest 를 이용한 DB table CRUD 기능
-기본으로 spring-boot web project 를 생성하고 아래 작업을 진행합니다.
-- spring-boot-data-rest maven dependency 추가
+기본으로 spring-boot web project 를 생성하고 아래 절차대로 작업을 진행합니다.
+- maven dependency 추가
 - application.yml 설정
 - model class 생성
 - repository class 생성
 - spring-boot 실행 후 API 확인
 
-### spring-boot-data-rest maven dependency 추가
+### maven dependency 추가
 - pom.xml
     ```xml
     <dependency>
@@ -42,6 +26,7 @@ redis cache 를 적용하는 과정을 설명한다.
         <artifactId>spring-data-rest-webmvc</artifactId>
     </dependency>
     ```
+
 ### application.yml 설정
 - 샘플소스는 mariadb 를 사용했으나 개별 사용중인 DB 를 사용하세요.
 - application-mariadb.yml 추가
@@ -68,6 +53,7 @@ redis cache 를 적용하는 과정을 설명한다.
         rest:
           basePath: /api
     ```
+
 ### model class 생성
 - table name, field name 에 맞춰서 아래 format 으로 작성합니다.
 - model.Department.java
@@ -89,6 +75,7 @@ redis cache 를 적용하는 과정을 설명한다.
         }
     }
     ```
+
 ### repository class 생성
 - repository.DepartmentRepository.java
     ```java
@@ -96,6 +83,7 @@ redis cache 를 적용하는 과정을 설명한다.
     public interface DepartmentRepository extends CrudRepository<Department, String> {
     }
     ```
+
 ### spring-boot 실행 후 API 확인
 - http://localhost:8080/dept-spring/api/
     ```json
@@ -152,12 +140,12 @@ redis cache 를 적용하는 과정을 설명한다.
 
 ## spring-boot redis 설정
 아래 작업을 진행합니다.
-- sprig-boot-data-redis maven dependency 추가
+- maven dependency 추가
 - application.yml redis 설정
 - redis configuration class 생성
 - repository class 에 cache 적용
 
-### sprig-boot-data-redis maven dependency 추가
+### maven dependency 추가
 - pom.xml
     ```xml
     <dependency>
@@ -165,6 +153,7 @@ redis cache 를 적용하는 과정을 설명한다.
         <artifactId>spring-boot-starter-data-redis</artifactId>
     </dependency>
     ```
+
 ### application.yml redis 설정
 - application-redis.yml 파일 생성
     ```yaml
@@ -172,11 +161,11 @@ redis cache 를 적용하는 과정을 설명한다.
       cache: 
         type: redis
         redis:
-        namespace: "htdp1:dept-spring:cache:" # redis key prefix
-        ttl: 10                               # time to leave (min)
-        host: 127.0.0.1                       # redis host
-        port: 7001                            # redis port
-        password:                             # redis password
+          namespace: "htdp1:dept-spring:cache:" # redis key name prefix
+          ttl: 10                               # time to leave (min)
+          host: 127.0.0.1                       # redis host
+          port: 7001                            # redis port
+          password:                             # redis password
     ```
 - application.yml 에 import 처리
     ```yaml
@@ -185,7 +174,11 @@ redis cache 를 적용하는 과정을 설명한다.
         import:
         - application-redis.yml
     ```
+
 ### redis configuration class 생성
+- application.yml 에서 redis 설정 정보를 가져온다.
+- RedisConnectionFactory 로 redis connection 을 생성한다.
+- CacheManager 에 prefix 와 ttl 을 설정한다.
 - config.CacheConfig.java
     ```java
     @Configuration
@@ -232,8 +225,12 @@ redis cache 를 적용하는 과정을 설명한다.
         }
     }
     ```
+
 ### repository class 에 cache 적용
-- cacheManager = "cacheManager" 는 CacheConfig.java 의 @Bean(name = "cacheManager") 과 동일하게 설정
+- cache 를 적용할 interface 를 @Override 한다.
+- cacheNames : cache key name
+- key : cache key
+- cacheManager : CacheConfig.java 의 @Bean(name = "cacheManager") 과 동일하게 설정한다.
 - repository.DepartmentRepository.java
     ```java
     @RepositoryRestResource
@@ -243,3 +240,17 @@ redis cache 를 적용하는 과정을 설명한다.
         Iterable<Department> findAll();
     }
     ```
+    
+# 기타
+## docker build
+```
+docker build -t dept-spring .
+```
+```
+docker tag dept-spring htdp1/dept-spring:v1
+docker push htdp1/dept-spring:v1
+```
+```
+docker tag dept-spring htdp1/dept-spring:latest
+docker push htdp1/dept-spring:latest
+```
