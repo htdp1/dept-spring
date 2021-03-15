@@ -35,8 +35,11 @@ public class DepartmentService {
 		return mapper.updateById(departmentTable);
 	}
 
-	@Caching(evict = { @CacheEvict(cacheNames = "departments", key = "'findAll'", cacheManager = "cacheManager"),
-			@CacheEvict(cacheNames = "departments", key = "#deptNo", cacheManager = "cacheManager") })
+	@Caching(evict = { 
+			@CacheEvict(cacheNames = "departments", key = "'findAll'", cacheManager = "cacheManager"),
+			@CacheEvict(cacheNames = "departments", key = "#deptNo", cacheManager = "cacheManager") 
+			}
+	)
 	public int deleteDepartment(String deptNo) {
 		return mapper.deleteById(deptNo);
 	}
