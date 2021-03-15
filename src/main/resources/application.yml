@@ -10,20 +10,26 @@ management:
         include: "*"
       
 spring:
+  application:
+    name: dept-spring
   config:
     import: 
     - application-apis.yml
     - application-mariadb.yml
     - application-redis.yml
-  application:
-    name: dept-spring
   data:
     rest:
       basePath: /api
-
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true # print jpa formated sql 
+  
 logging:
   level:
     '[com.htdp1.deptspring]': debug
+    '[org.hibernate.SQL]': debug
+    '[org.hibernate.type.descriptor.sql.BasicBinder]': trace
 
 ### user defined ###
 session:
