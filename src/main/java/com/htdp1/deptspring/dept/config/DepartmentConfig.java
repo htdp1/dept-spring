@@ -1,13 +1,11 @@
 package com.htdp1.deptspring.dept.config;
 
+import com.htdp1.deptspring.dept.model.Department;
+
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.relational.core.mapping.event.BeforeSaveEvent;
-
-import com.htdp1.deptspring.dept.model.Department;
-
-import lombok.AllArgsConstructor;
 
 @Configuration
 public class DepartmentConfig {
