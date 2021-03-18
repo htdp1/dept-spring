@@ -19,27 +19,18 @@ public class DepartmentService {
 
 	public DepartmentMapper mapper;
 
-	@Cacheable(cacheNames = "departments", key = "'findAll'", cacheManager = "cacheManager")
 	public List<Department> getDepartments() {
 		return mapper.findAll();
 	}
 
-	@Cacheable(cacheNames = "departments", key = "#deptNo", cacheManager = "cacheManager")
 	public Department getDepartment(String deptNo) {
 		return mapper.findById(deptNo);
 	}
 
-	@CacheEvict(cacheNames = "departments", key = "'findAll'", cacheManager = "cacheManager")
-	@CachePut(cacheNames = "departments", key = "#departmentTable.deptNo", cacheManager = "cacheManager")
 	public int setDepartment(Department departmentTable) {
 		return mapper.updateById(departmentTable);
 	}
 
-	@Caching(evict = { 
-			@CacheEvict(cacheNames = "departments", key = "'findAll'", cacheManager = "cacheManager"),
-			@CacheEvict(cacheNames = "departments", key = "#deptNo", cacheManager = "cacheManager") 
-			}
-	)
 	public int deleteDepartment(String deptNo) {
 		return mapper.deleteById(deptNo);
 	}

@@ -1,6 +1,7 @@
 spring: 
   session:
     store-type: redis
+    # user-defined
     redis:
       namespace: "htdp1:session"
       host: 127.0.0.1
@@ -9,6 +10,7 @@ spring:
 
   cache: 
     type: redis
+    # user-defined
     redis:
       namespace: "htdp1:dept-spring:cache:"
       ttl: 10 # min
@@ -16,6 +18,7 @@ spring:
       port: 7001
       password:
       
+  # user-defined
   repository: 
     type: redis
     redis:

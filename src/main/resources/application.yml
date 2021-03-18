@@ -7,29 +7,35 @@ management:
   endpoints:
     web:
       exposure:
-        include: "*"
+        include: "*" # acturator
       
 spring:
   application:
     name: dept-spring
+    
   config:
     import: 
     - application-apis.yml
     - application-mariadb.yml
     - application-redis.yml
+  
   data:
     rest:
-      basePath: /api
+      basePath: /api # spring-data-rest-webmvc base path
+  
   jpa:
     properties:
       hibernate:
-        format_sql: true # print jpa formated sql 
+        format_sql: true # print JPA formated sql 
   
 logging:
   level:
-    '[com.htdp1.deptspring]': debug
-    '[org.hibernate.SQL]': debug
-    '[org.hibernate.type.descriptor.sql.BasicBinder]': trace
+    root: warn                            # all logging
+    '[com.htdp1.deptspring]': debug       # Application logging
+    '[org.springframework.cache]': trace  # @Cacheable logging
+    '[org.springframework.data]': trace   # JPA logging
+    '[org.hibernate.SQL]': debug          # print JPA SQL 
+    '[org.hibernate.type.descriptor.sql.BasicBinder]': trace # pring JPA SQL Parameters
 
 ### user defined ###
 session:

@@ -17,11 +17,9 @@ public class SessionInterceptor implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		
-		log.debug("********** INTERCEPTION SUCCESSFUL **********");
+		log.debug("preHandle()");
 		
 		HttpSession session = request.getSession();
-
 		log.debug("session.getId() => " + session.getId());
 
 		return true;
@@ -30,11 +28,13 @@ public class SessionInterceptor implements HandlerInterceptor {
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
+		log.debug("postHandle()");
 
 	}
 
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
 			throws Exception {
+		log.debug("afterCompletion()");
 	}
 }

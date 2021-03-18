@@ -24,12 +24,12 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		log.debug("enabled => " + enabled);
+		log.debug("${session.enabled} => " + enabled);
 
 		if (enabled) {
-			log.debug("enabled => " + enabled);
-			registry.addInterceptor(sessionInterceptor)
-					.addPathPatterns("/v1/**");
+			registry.addInterceptor(sessionInterceptor) // Interceptor
+					.addPathPatterns("/v1/**") // include path
+			;
 		}
 	}
 }

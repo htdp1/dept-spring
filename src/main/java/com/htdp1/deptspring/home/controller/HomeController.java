@@ -23,8 +23,8 @@ public class HomeController {
 	}
 
 	@GetMapping("/session")
-	public String index(HttpSession session) {
-		log.debug("index");
+	public String session(HttpSession session) {
+		log.debug("session");
 
 		return "Hello " + applicationName + " " + session.getId();
 	}

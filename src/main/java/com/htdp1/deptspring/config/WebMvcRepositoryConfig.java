@@ -22,10 +22,13 @@ public class WebMvcRepositoryConfig implements WebMvcConfigurer {
 
 	@Bean
 	public MappedInterceptor dbEditorTenantInterceptor() {
-		log.debug("enabled => " + enabled);
+		log.debug("${session.enabled} => " + enabled);
 
 		if (enabled) {
-			return new MappedInterceptor(new String[] { "/api/**" }, dbEditorTenantInterceptor);
+			return new MappedInterceptor( // @Nullable String[] includePatterns, HandlerInterceptor interceptor
+					new String[] { "/api/**" } // include path
+					, dbEditorTenantInterceptor // interceptor
+			);
 		}
 
 		return null;

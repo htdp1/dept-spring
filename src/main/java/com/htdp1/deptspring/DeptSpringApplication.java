@@ -24,8 +24,11 @@ public class DeptSpringApplication {
 
 	@PostConstruct
 	public void init() {
+		
+		// redis repository delete all
 		departmentRepository.deleteAll();
 		
+		// redis repository add data
 		for (int i = 0; i < 3; i++) {
 			departmentRepository.save(new DepartmentRedis("t" + i, "test" + i));
 		}

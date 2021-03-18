@@ -1,4 +1,7 @@
+# application 외부에 있는 서비스 연결을 위한 정보
+
+# user defined
 apis:
-#  userinfo: http://localhost:3000/user_info/
+  # userinfo: http://localhost:3000/user_info/
   userinfo: http://k8s-sessiond-empsprin-eddc7b7a44-95816314.ap-northeast-2.elb.amazonaws.com/test/
   
