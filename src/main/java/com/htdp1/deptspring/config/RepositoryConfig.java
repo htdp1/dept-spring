@@ -1,16 +1,20 @@
 package com.htdp1.deptspring.config;
 
+import com.htdp1.deptspring.dept.model.DepartmentRedis;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
+import org.springframework.data.redis.connection.lettuce.LettuceClientConfiguration;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.repository.configuration.EnableRedisRepositories;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 
-import com.htdp1.deptspring.dept.model.DepartmentRedis;
+import io.lettuce.core.ClientOptions;
+import io.lettuce.core.protocol.ProtocolVersion;
 
 @Configuration
 @EnableRedisRepositories
@@ -25,10 +29,21 @@ public class RepositoryConfig {
 		redisStandaloneConfiguration.setHostName(host);
 		redisStandaloneConfiguration.setPort(port);
 
-		LettuceConnectionFactory connectionFactory = new LettuceConnectionFactory(redisStandaloneConfiguration);
+		ClientOptions clientOptions = ClientOptions.builder()
+		.protocolVersion(ProtocolVersion.RESP2)
+		.build();
+
+		LettuceClientConfiguration clientConfig = LettuceClientConfiguration.builder()
+		.clientOptions(clientOptions)
+		.build();
+
+		LettuceConnectionFactory connectionFactory = new LettuceConnectionFactory(redisStandaloneConfiguration, clientConfig);
+		connectionFactory.setValidateConnection(false);
+		connectionFactory.afterPropertiesSet();
 
 		return connectionFactory;
 	}
+
 
 	@Bean
 	public RedisTemplate<?, ?> redisTemplate() {
