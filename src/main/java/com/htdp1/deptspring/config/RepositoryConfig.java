@@ -29,21 +29,18 @@ public class RepositoryConfig {
 		redisStandaloneConfiguration.setHostName(host);
 		redisStandaloneConfiguration.setPort(port);
 
-		ClientOptions clientOptions = ClientOptions.builder()
-		.protocolVersion(ProtocolVersion.RESP2)
-		.build();
+		ClientOptions clientOptions = ClientOptions.builder().protocolVersion(ProtocolVersion.RESP2).build();
 
-		LettuceClientConfiguration clientConfig = LettuceClientConfiguration.builder()
-		.clientOptions(clientOptions)
-		.build();
+		LettuceClientConfiguration clientConfig = LettuceClientConfiguration.builder().clientOptions(clientOptions)
+				.build();
 
-		LettuceConnectionFactory connectionFactory = new LettuceConnectionFactory(redisStandaloneConfiguration, clientConfig);
+		LettuceConnectionFactory connectionFactory = new
+		LettuceConnectionFactory(redisStandaloneConfiguration, clientConfig);
 		connectionFactory.setValidateConnection(false);
 		connectionFactory.afterPropertiesSet();
 
 		return connectionFactory;
 	}
-
 
 	@Bean
 	public RedisTemplate<?, ?> redisTemplate() {

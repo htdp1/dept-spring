@@ -1,13 +1,11 @@
 package com.htdp1.deptspring;
 
-import javax.annotation.PostConstruct;
+import com.htdp1.deptspring.dept.model.DepartmentRedis;
+import com.htdp1.deptspring.dept.repository.DepartmentRepositoryRedis;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import com.htdp1.deptspring.dept.model.DepartmentRedis;
-import com.htdp1.deptspring.dept.repository.DepartmentRepositoryRedis;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -22,7 +20,7 @@ public class DeptSpringApplication {
 	@Autowired
 	private DepartmentRepositoryRedis departmentRepository;
 
-	@PostConstruct
+	// @PostConstruct
 	public void init() {
 		
 		// redis repository delete all
